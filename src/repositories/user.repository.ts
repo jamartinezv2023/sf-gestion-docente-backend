@@ -18,6 +18,16 @@ export const updatePassword = async (
   );
 };
 
+export const updateUserPassword = async (id: number, passwordHash: string) => {
+  await pool.query(
+    `
+    UPDATE users
+    SET password_hash = $1
+    WHERE id = $2
+    `,
+    [passwordHash, id]
+  );
+};
 
 export const getAllUsers = async () => {
   const result = await pool.query(
